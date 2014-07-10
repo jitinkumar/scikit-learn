@@ -250,8 +250,9 @@ def load_svmlight_files(files, n_features=None, dtype=np.float64,
     result = []
     for data, indices, indptr, y, query_values in r:
         shape = (indptr.shape[0] - 1, n_features)
-        X = sp.csr_matrix((data, indices, indptr), shape)
-        X.sort_indices()
+        X=np.asarray(data.reshape(shape))
+        #X = sp.csr_matrix((data, indices, indptr), shape)
+        #X.sort_indices()
         result += X, y
         if query_id:
             result.append(query_values)
